@@ -7,12 +7,15 @@ function Dashboard() {
   const{tasks}=useTask()
   const {notes}=useNote()
   const {user}=useUser()
+  
+  const dueTasksList=tasks.filter((task)=>(!task.completed))
   const completed=tasks.filter((task)=>(task.completed)).length
+  const dueTasks=tasks.length-completed
   
   return (
   <div className='flex flex-col gap-8 m-10'> 
 <h1 className='font-bold text-2xl'>Welcome {user}, </h1>
-<div className='flex justify-center  px-16'>
+<div className='flex flex-col gap-5 justify-center  px-16'>
   <div className='flex flex-col justify-center align-middle px-30 py-5 gap-10 bg-blue-200 w-full'>
  <h1 className='font-bold'>Tasks due today: {tasks.length-completed}</h1>
  <h1 className='font-bold'>Completed Tasks:{completed}</h1>
@@ -28,6 +31,11 @@ function Dashboard() {
 ))}</div>
 
   </div>
+  {(dueTasks>0) &&(<div className='flex flex-col justify-center align-middle px-30 py-5  bg-blue-200 w-full'>
+  <h1 className='font-bold'>Tasks due today: </h1>
+  {dueTasksList.map((item,index)=>
+  <div key={index}>{item.text}</div>)}
+  </div>)}
 </div>
 
 </div> 

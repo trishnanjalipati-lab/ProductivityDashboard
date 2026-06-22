@@ -11,6 +11,7 @@ import { TaskProvider } from './context/TaskContext.jsx'
 import { NoteProvider } from './context/NoteContext.jsx'
 import { useState } from 'react'
 import { UserProvider } from './context/UserContext.jsx'
+import Login from './components/Login.jsx'
 
 function TaskWrapper(){
   const [tasks,setTasks]=useState(()=>{
@@ -27,12 +28,15 @@ function TaskWrapper(){
   })
   const router=createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<Root />}>
-      <Route path='' element={<Dashboard />} />
+    <>
+    <Route path='/' element={<Login />} />
+    <Route element={<Root />}>
+      <Route path='dashboard' element={<Dashboard />} />
       <Route path='taskmanager' element={<Taskmanager />} />
       <Route path='notes' element={<Notes />} />
       <Route path='settings' element={<Settings />} />
     </Route>,
+    </>
   )
 )
 return(

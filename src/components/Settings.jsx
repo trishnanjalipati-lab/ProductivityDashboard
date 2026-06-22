@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useUser from '../context/UserContext'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 function Settings() {
   const{user,setUser}=useUser()
   const userref=useRef(null)
   const selectref=useRef(null)
+  const navigate=useNavigate()
   const [sort,setsort]=useState(localStorage.getItem("sortOrder")||"Latest First")
   
   useEffect(()=>{
@@ -18,17 +20,27 @@ function Settings() {
   }
   },[])
 
+  const logout=()=>{
+    localStorage.removeItem("name")
+    navigate("/")
+    setUser("")
+  }
+
   return (
     <div className='bg-gray-300 flex flex-col m-10 p-2.5  gap-3'>
     <h1 className='font-bold text-3xl'>Settings</h1>
      <div>
+     <form onSubmit={(e)=>setUser(e.target.value)}>
      <span>Name:</span>
+     
      <input 
       className='mx-1 p-0.5'
       value={user}
       ref={userref}
       onChange={(e)=>setUser(e.target.value)}
+      required
      ></input>
+     </form>
      </div>
      <div>
      <span>Sort:</span>
@@ -56,7 +68,7 @@ function Settings() {
             
         </label>
      </div>
-    
+      <button className='bg-white p-1 rounded-md my-2 cursor-pointer' onClick={logout}>Logout</button>
     </div>
   )
 }
