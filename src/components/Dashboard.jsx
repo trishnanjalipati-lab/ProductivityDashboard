@@ -17,10 +17,10 @@ function Dashboard() {
  <h1 className='font-bold'>Tasks due today: {tasks.length-completed}</h1>
  <h1 className='font-bold'>Completed Tasks:{completed}</h1>
  <h1 className='font-bold'>Notes Created:{notes.length}</h1>
-<div><p className='font-bold'>Recent Tasks:</p>{tasks.map((tasks,index)=>(
+<div><p className='font-bold'>Recent Tasks:</p>{!tasks.length?"EMPTY": tasks.map((tasks,index)=>(
   <div key={index}>{tasks.text}</div>
 ))} </div>
-<div><p className='font-bold'> Recent Notes:</p> {notes.map((note,index)=>(
+<div><p className='font-bold'> Recent Notes:</p> {!notes.length? "EMPTY":notes.map((note,index)=>(
   <div key={index}>
   <div className='font-bold'>{note.title}</div>
   <div >{note.note}</div>
