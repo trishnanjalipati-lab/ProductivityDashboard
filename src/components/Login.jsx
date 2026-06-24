@@ -32,7 +32,7 @@ function Login() {
         
         <h1 className='font-serif font-extrabold text-4xl dark:text-white'>Productivity Dashboard </h1>
         <form onSubmit={handleBtn}>
-        <div className='bg-amber-200 flex flex-col items-center rounded-md p-1.5 gap-5 shadow-[5px_5px_10px_#7a6969bd] dark:bg-[#1a1a1a] dark:text-white'>
+        <div className='bg-amber-200 flex flex-col items-center rounded-md p-4 gap-5 shadow-[5px_5px_10px_#7a6969bd] dark:bg-[#1a1a1a] dark:text-white'>
             <h1 className='text-2xl font-semibold'>Welcome!!</h1>
             <label className='text-lg'>Enter your name</label>
             <input 
