@@ -20,7 +20,7 @@ function Login() {
     
   return (
   <div className='flex flex-col h-full'>
-    <div className='flex flex-col w-25 justify-between self-end my-1'>
+    <div className='flex flex-col w-25 justify-between self-end my-1 mx-5'>
      <span className='self-center dark:text-white'>Theme</span>
       <ToggleTheme
   duration={600}
