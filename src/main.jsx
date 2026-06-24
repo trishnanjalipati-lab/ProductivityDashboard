@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
@@ -12,8 +12,24 @@ import { NoteProvider } from './context/NoteContext.jsx'
 import { useState } from 'react'
 import { UserProvider } from './context/UserContext.jsx'
 import Login from './components/Login.jsx'
+import { Themeprovider } from './context/Themecontext.jsx'
 
 function TaskWrapper(){
+  const [mode,setmode]=useState(()=>{
+    const theme=localStorage.getItem("mode")
+    return theme?(theme): "light"})
+  const lightmode=()=>{
+    setmode("light")
+  }
+  const darkmode=()=>{
+    setmode("dark")
+  }
+
+  useEffect(()=>{
+    document.querySelector("html").classList.remove("light","dark")
+    document.querySelector("html").classList.add(mode)
+  },[mode])
+
   const [tasks,setTasks]=useState(()=>{
     const load=localStorage.getItem("Tasks")
     return load ? JSON.parse(load):[]
@@ -40,6 +56,7 @@ function TaskWrapper(){
   )
 )
 return(
+  <Themeprovider value={{mode,lightmode,darkmode}} >
   <TaskProvider value={{tasks,setTasks}}>
   <NoteProvider value={{ notes, setnotes }}>
   <UserProvider value={{user,setUser}}>
@@ -48,6 +65,7 @@ return(
     
   </NoteProvider>  
   </TaskProvider>
+  </Themeprovider>
 )
 
 };

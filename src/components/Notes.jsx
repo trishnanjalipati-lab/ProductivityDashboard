@@ -11,14 +11,7 @@ function Notes() {
   const handleBtn=()=>{
     setshowNote(true)
     }
-  
-  
-  // useEffect(() => {
-  //   const saved = localStorage.getItem("Notes");  
-  //   if (saved) {
-  //     setnotes(JSON.parse(saved));
-  //   }
-  // }, []);
+ 
 
   useEffect(() => {
     localStorage.setItem("Notes", JSON.stringify(notes));
@@ -69,33 +62,39 @@ function Notes() {
     ))
   }
   const displayedNotes= order === "Latest First" ? [...notes].reverse(): notes;
+  const deleteNote=(id)=>{
+    setnotes(notes.filter((notes)=>id!==notes.id))
+  }
 
   return (
-    <div className='flex flex-col bg-amber-300 m-10 p-2.5  gap-3'>
+    <div className='flex flex-col bg-[#CFB177] shadow-[7px_7px_10px_#7a6969bd] rounded-lg m-10 p-2.5 gap-3 dark:bg-[#1a1a1a] dark:text-white '>
     <h1 className='font-bold text-3xl'>Notes</h1>
     {(showNote)&& (
       <div >
-    <div className='flex flex-col bg-white border-2 border-black p-1 rounded-lg'  ref={noteref}>
-      <textarea placeholder='title' className='text-xl p-1 font-bold  focus:outline-none h-9' value={title} onChange={(e)=>settitle(e.target.value)}></textarea>
+    <div className='flex flex-col bg-white border-2 border-black p-1 rounded-lg dark:text-black' ref={noteref}>
+      <textarea placeholder='title' className='text-xl p-1 font-bold  focus:outline-none h-9' value={title} onChange={(e)=>settitle(e.target.value)} autoFocus></textarea>
       <textarea placeholder='note' className='p-1 focus:outline-none' value={note} onChange={(e)=>setnote(e.target.value)} ></textarea>
     </div>
     </div>
     )}
 
     {displayedNotes.map((item) => (
-       <div key={item.id}  className="flex flex-col bg-white border-2 border-black p-1 rounded-lg" > 
+       <div key={item.id}  className="group flex flex-col bg-white border-2 border-black p-1 rounded-lg dark:text-black " > 
+       <div className='flex justify-between'>
        <textarea
         value={item.title}
         onChange={(e)=>changeTitle(item.id,e.target.value)}
-        className="text-xl p-1 font-bold focus:outline-none h-9"
+        className="text-xl p-1 font-bold focus:outline-none h-9 resize-none "
       />
+      <button className='opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer' onClick={()=>deleteNote(item.id)}><img width={20} src='src\assets\image.png' /></button>
+      </div>
       <textarea
         value={item.note}
         onChange={(e)=>changeNote(item.id,e.target.value)}
-        className="p-1 focus:outline-none"
+        className="p-1 focus:outline-none resize-none"
       /> 
        </div> ))}
-    <button type='button' onClick={handleBtn} className='font-bold text-3xl rounded-full h-12 w-12 self-end bg-white cursor-pointer'id='button'>+</button>
+    <button type='button' onClick={handleBtn} className='font-bold text-3xl rounded-full h-12 w-12 self-end bg-white cursor-pointer dark:text-black 'id='button'>+</button>
     </div>
   )
 }
