@@ -57,7 +57,7 @@ function Notes() {
   const changeNote=(id,value)=>{
     setnotes(notes.map((item)=>
       item.id === id
-        ? { ...item, note: value }
+        ? { ...item,id:Date.now() , note: value }
         : item
     ))
   }
