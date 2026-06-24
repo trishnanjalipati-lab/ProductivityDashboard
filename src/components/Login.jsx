@@ -28,7 +28,7 @@ function Login() {
   className="bg-gray-100 dark:bg-gray-700"
 />
      </div>
-    <div className='flex flex-col items-center m-30 gap-5'>
+    <div className='flex flex-col items-center m-25 gap-5'>
         
         <h1 className='font-serif font-extrabold text-4xl dark:text-white'>Productivity Dashboard </h1>
         <form onSubmit={handleBtn}>
