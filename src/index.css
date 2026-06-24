@@ -1,6 +1,8 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@plugin 'lightswind/plugin';
 @custom-variant dark (&:where(.dark, .dark *));
 
-html.dark {
+html.dark,
+html.dark body {
     background-color: #1d1f1f;
 }

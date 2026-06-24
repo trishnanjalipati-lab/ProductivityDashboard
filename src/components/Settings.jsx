@@ -60,7 +60,7 @@ function Settings() {
      <div>
      <span>Sort:</span>
      <select 
-     className='mx-1 p-0.5 cursor-pointer' 
+     className='mx-1 p-0.5 cursor-pointer dark:bg-[#1a1a1a]' 
      ref={selectref}
      value={sort}
      onChange={(e) =>
