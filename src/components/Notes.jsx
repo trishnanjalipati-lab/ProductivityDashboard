@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import deleteicon from "../assets/image.png"
 import { useState } from 'react'
 import useNote from '../context/NoteContext'
 function Notes() {
@@ -86,7 +87,7 @@ function Notes() {
         onChange={(e)=>changeTitle(item.id,e.target.value)}
         className="text-xl p-1 font-bold focus:outline-none h-9 resize-none "
       />
-      <button className='opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer' onClick={()=>deleteNote(item.id)}><img width={20} src='src\assets\image.png' /></button>
+      <button className='opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer' onClick={()=>deleteNote(item.id)}><img width={20} src={deleteicon} /></button>
       </div>
       <textarea
         value={item.note}

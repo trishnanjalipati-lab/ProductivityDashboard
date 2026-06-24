@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useTask, { TaskProvider } from '../context/TaskContext'
+import deleteicon from "../assets/image.png"
+import editicon from "../assets/edit.png"
 
 function Taskmanager() {
   const[task,setTask]=useState("")
@@ -77,8 +79,8 @@ function Taskmanager() {
         {value.text}
         <div >
         <input type='checkbox' checked={value.completed} id={index} onChange={()=>taskStatus(value.id)}></input>
-        <button className='m-3 cursor-pointer' onClick={()=>{setshowInput(false); seteditTaskid(value.id); seteditTask(value.text);}}><img src='src\assets\edit.png' width={24}/></button>
-        <button className='hidden group-hover:inline cursor-pointer' onClick={()=>deleteTask(value.id)}><img width={20} src='src\assets\image.png' /></button>
+        <button className='m-3 cursor-pointer' onClick={()=>{setshowInput(false); seteditTaskid(value.id); seteditTask(value.text);}}><img src={editicon} width={24}/></button>
+        <button className='hidden group-hover:inline cursor-pointer' onClick={()=>deleteTask(value.id)}><img width={20} src={deleteicon} /></button>
         </div>
       </div>}
     }
