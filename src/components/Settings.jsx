@@ -42,14 +42,15 @@ function Settings() {
     <div className='bg-[#C9C3BD] shadow-[5px_5px_10px_#7a6969bd] rounded-lg flex flex-col m-10 p-2.5 gap-3 dark:bg-[#1a1a1a] dark:text-white '>
     <h1 className='font-bold text-3xl'>Settings</h1>
      <div>
-     <form onSubmit={(e) => {
+     <form className='flex gap-1 items-center w-full'
+     onSubmit={(e) => {
     
     localStorage.setItem("name", JSON.stringify(user));
   }}>
-     <span>Name:</span>
+     <span >Name:</span>
      
      <input 
-      className='mx-1 p-0.5'
+      className=' p-0.5 flex-1 min-w-0'
       value={user}
       ref={userref}
       onChange={(e)=>setUser(e.target.value)}

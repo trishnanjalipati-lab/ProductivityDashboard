@@ -62,9 +62,10 @@ function Taskmanager() {
     <div id='taskContainer' className='flex flex-col gap-1' >
     {displayTasks.map((value,index)=>{
     if (editTaskid===value.id){
-      return ( <form className='flex gap-4' onSubmit={updateTask}>
+      return ( 
+      <form className='flex gap-4 w-full max-md:flex-col max-md:gap-1' onSubmit={updateTask}>
       <input 
-      className='bg-white text-black p-3 rounded-lg'
+      className='bg-white text-black p-3 rounded-lg '
       value={editTask}
       onChange={(e)=>seteditTask(e.target.value)}
       autoFocus
@@ -75,12 +76,12 @@ function Taskmanager() {
       </form>)
     }
     else
-      {return <div className={` group flex justify-between bg-white text-black rounded-lg px-3 py-2 text-xl break-all items-center  ${value.completed?"line-through":""}`} key={index} >
-        {value.text}
-        <div >
+      {return <div className={` group flex justify-between bg-white text-black rounded-lg px-3 py-2 text-xl break-all items-center gap-1  ${value.completed?"line-through":""}`} key={index} >
+        <p className='flex-4'>{value.text}</p>
+        <div className='flex-3 text-end'>
         <input type='checkbox' checked={value.completed} id={index} onChange={()=>taskStatus(value.id)}></input>
         <button className='m-3 cursor-pointer' onClick={()=>{setshowInput(false); seteditTaskid(value.id); seteditTask(value.text);}}><img src={editicon} width={24}/></button>
-        <button className='hidden group-hover:inline cursor-pointer' onClick={()=>deleteTask(value.id)}><img width={20} src={deleteicon} /></button>
+        <button className='md:hidden md:group-hover:inline cursor-pointer ' onClick={()=>deleteTask(value.id)}><img width={20} src={deleteicon} /></button>
         </div>
       </div>}
     }
