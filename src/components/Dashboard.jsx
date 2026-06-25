@@ -14,7 +14,7 @@ function Dashboard() {
   
   return (
   <div className='flex flex-col gap-8 m-10  max-md:m-8 '> 
-<h1 className='font-bold text-2xl dark:text-white'>Welcome {user}, </h1>
+<h1 className='font-bold text-2xl break-all dark:text-white'>Welcome {user}, </h1>
 <div className='flex flex-col gap-5 justify-center  px-16 max-md:px-1'>
   <div className='flex flex-col justify-center align-middle px-30 py-5 gap-10 bg-blue-200 shadow-[5px_5px_10px_#88737378] rounded-lg w-full dark:bg-[#1a1a1a] dark:text-white max-md:px-5'>
  <h1 className='font-bold'>Tasks due today: {tasks.length-completed}</h1>
