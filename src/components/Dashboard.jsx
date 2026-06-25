@@ -3,6 +3,7 @@ import useTask, { TaskProvider } from '../context/TaskContext'
 import Notes from './Notes'
 import useNote from '../context/NoteContext'
 import useUser from '../context/UserContext'
+import { NavLink } from 'react-router-dom'
 function Dashboard() {
   const{tasks}=useTask()
   const {notes}=useNote()
@@ -17,9 +18,9 @@ function Dashboard() {
 <h1 className='font-bold text-2xl break-all dark:text-white'>Welcome {user}, </h1>
 <div className='flex flex-col gap-5 justify-center  px-16 max-md:px-1'>
   <div className='flex flex-col justify-center align-middle px-30 py-5 gap-10 bg-blue-200 shadow-[5px_5px_10px_#88737378] rounded-lg w-full dark:bg-[#1a1a1a] dark:text-white max-md:px-5'>
- <h1 className='font-bold'>Tasks due today: {tasks.length-completed}</h1>
- <h1 className='font-bold'>Completed Tasks:{completed}</h1>
- <h1 className='font-bold'>Notes Created:{notes.length}</h1>
+ <NavLink to="/taskmanager"><h1 className='font-bold'>Tasks due today: {tasks.length-completed}</h1></NavLink>
+ <NavLink to="/taskmanager"><h1 className='font-bold'>Completed Tasks:{completed}</h1></NavLink>
+ <NavLink to="/notes"> <h1 className='font-bold'>Notes Created:{notes.length}</h1></NavLink>
 <div><p className='font-bold'>Recent Tasks:</p>{!tasks.length?"EMPTY": tasks.map((tasks,index)=>(
   <div key={index}>{tasks.text}</div>
 ))} </div>
