@@ -90,6 +90,7 @@ function Notes() {
        <div className='flex justify-between'>
        <textarea
         value={item.title}
+        placeholder='title'
         onChange={(e)=>changeTitle(item.id,e.target.value)}
         className="text-xl p-1 font-bold focus:outline-none h-9 flex-1 resize-none "
       />
@@ -97,6 +98,7 @@ function Notes() {
       </div>
       <textarea
         value={item.note}
+        placeholder='note'
         onChange={(e)=>changeNote(item.id,e.target.value)}
         className="p-1 focus:outline-none flex-1 resize-none"
       /> 
