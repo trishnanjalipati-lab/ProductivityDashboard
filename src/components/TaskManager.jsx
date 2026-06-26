@@ -9,8 +9,10 @@ function Taskmanager() {
   const [showInput, setshowInput] = useState(false)
   const [editTask, seteditTask] = useState("")
   const [editTaskid, seteditTaskid] = useState(null)
-  const order=localStorage.getItem("sortOrder")
-  const displayTasks= order==="Latest First"?[...tasks].reverse():tasks
+  const [search,setsearch]=useState("")
+  const[sort,setsort]=useState(()=>{return localStorage.getItem("taskorder") || "Latest First"})
+  // const order=localStorage.getItem("sortOrder")
+  const displayTasks= sort==="Latest First"?[...tasks].reverse():tasks
   const handleBtn=()=>{
     setshowInput(true)
 }
@@ -40,8 +42,33 @@ function Taskmanager() {
   const deleteTask=(id)=>{
     setTasks(tasks.filter(task=>id!==task.id))
   }
-  return (
+  const searchedTasks=displayTasks.filter((task)=>
+    task.text.toLowerCase().includes(search.trim().toLowerCase())
+  )
+
     
+  
+
+  return (
+    <div>
+    <div className='flex justify-between m-10 gap-2 max-md:flex-col max-md:m-3'>
+    <input type='search' 
+    placeholder='search' 
+    value={search}
+    className='bg-white text-black min-w-0 gap-1 p-1 rounded-sm border-2 border-black' 
+    onChange={(e)=>setsearch(e.target.value)}
+    />
+    <div className='flex dark:bg-white text-black gap-1 p-1 rounded-sm border-2 border-black'>
+    <p>Sort by:</p>
+    <select className='cursor-pointer outline-0' value={sort} onChange={(e)=>
+    {setsort(e.target.value)
+    localStorage.setItem("taskorder",e.target.value)}}>
+      <option>Latest First</option>
+      <option>Oldest First</option>
+    </select>
+    </div>
+    </div>
+
     <div className='flex flex-col bg-[#126842] shadow-[5px_5px_10px_#7a6969bd] text-white m-10 p-2.5 overflow-x-hidden rounded-lg gap-3 dark:bg-[#1a1a1a]'>
     <h1 className='font-bold text-3xl'>Tasks</h1>
     {(showInput)&&(
@@ -60,7 +87,7 @@ function Taskmanager() {
     </div>
   )}
     <div id='taskContainer' className='flex flex-col gap-1' >
-    {displayTasks.map((value,index)=>{
+    {searchedTasks.map((value,index)=>{
     if (editTaskid===value.id){
       return ( 
       <form className='flex gap-4 w-full max-md:flex-col max-md:gap-1' onSubmit={updateTask}>
@@ -88,6 +115,7 @@ function Taskmanager() {
     )}
     </div>
     <button type='button' onClick={handleBtn} className='font-bold text-3xl rounded-full h-12 w-12 self-end bg-white text-black cursor-pointer'id='button'>+</button>
+    </div>
     </div>
    
   )

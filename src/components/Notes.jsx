@@ -7,8 +7,10 @@ function Notes() {
   const [note, setnote] = useState("")
   const { notes, setnotes } = useNote()
   const [showNote,setshowNote]=useState(false) 
+  const [search,setsearch]=useState("")
+  const [sort,setsort]=useState(()=>{return localStorage.getItem("noteorder")||"Latest First"})
   const noteref=useRef(null)
-  const order=localStorage.getItem("sortOrder")
+  // const order=localStorage.getItem("sortOrder")
   const handleBtn=()=>{
     setshowNote(true)
     }
@@ -68,12 +70,33 @@ function Notes() {
         : item
     ))
   }
-  const displayedNotes= order === "Latest First" ? [...notes].reverse(): notes;
+  const displayedNotes= sort === "Latest First" ? [...notes].reverse(): notes;
   const deleteNote=(id)=>{
     setnotes(notes.filter((notes)=>id!==notes.id))
   }
 
+  const searchedNotes=displayedNotes.filter((notes)=>(
+    notes.note.toLowerCase().includes(search.trim().toLowerCase())||
+    notes.title.toLowerCase().includes(search.trim().toLowerCase())
+  ))
   return (
+    <div>
+    <div className='flex justify-between m-10 gap-2 max-md:flex-col max-md:m-3'>
+    <input type='search'
+     placeholder='search' 
+     value={search}
+     onChange={(e)=>setsearch(e.target.value)}
+     className='bg-white text-black min-w-0 gap-1 p-1 rounded-sm border-2 border-black' />
+    <div className='flex dark:bg-white text-black gap-1 p-1 rounded-sm border-2 border-black'>
+    <p>Sort by:</p>
+    <select className='cursor-pointer outline-0' value={sort} onChange={(e)=>
+    {setsort(e.target.value)
+    localStorage.setItem("noteorder",e.target.value)}}>
+      <option>Latest First</option>
+      <option>Oldest First</option>
+    </select>
+    </div>
+    </div>
     <div className='flex flex-col bg-[#CFB177] shadow-[7px_7px_10px_#7a6969bd] rounded-lg m-10 p-2.5 gap-3 dark:bg-[#1a1a1a] dark:text-white '>
     <h1 className='font-bold text-3xl'>Notes</h1>
     {(showNote)&& (
@@ -85,7 +108,7 @@ function Notes() {
     </div>
     )}
 
-    {displayedNotes.map((item) => (
+    {searchedNotes.map((item) => (
        <div key={item.id}  className="group flex flex-col bg-white border-2 border-black p-1 rounded-lg dark:text-black " > 
        <div className='flex justify-between'>
        <textarea
@@ -104,6 +127,7 @@ function Notes() {
       /> 
        </div> ))}
     <button type='button' onClick={handleBtn} className='font-bold text-3xl rounded-full h-12 w-12 self-end bg-white cursor-pointer dark:text-black 'id='button'>+</button>
+    </div>
     </div>
   )
 }

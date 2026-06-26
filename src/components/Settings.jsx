@@ -9,8 +9,8 @@ function Settings() {
   const selectref=useRef(null)
   const {mode,lightmode,darkmode}=usetheme()
   const navigate=useNavigate()
-  const [sort,setsort]=useState(localStorage.getItem
-  ("sortOrder")||"Latest First")
+  const[sortTask,setsortTask]=useState(()=>{return localStorage.getItem("taskorder")||"Latest First"})
+  const [sortNotes,setsortNotes]=useState(()=>{return localStorage.getItem("noteorder")||"Latest First"})
   
   useEffect(()=>{
     function handleClick(event){
@@ -59,14 +59,27 @@ function Settings() {
      </form>
      </div>
      <div>
-     <span>Sort:</span>
+     <span>Sort tasks:</span>
      <select 
      className='mx-1 p-0.5 cursor-pointer dark:bg-[#1a1a1a]' 
      ref={selectref}
-     value={sort}
+     value={sortTask}
      onChange={(e) =>
-     {setsort(e.target.value) 
-     localStorage.setItem("sortOrder",e.target.value)}}>
+     {setsortTask(e.target.value) 
+     localStorage.setItem("taskorder",e.target.value)}}>
+     <option>Latest First</option>
+     <option>Oldest First</option>
+     </select>
+     </div>
+     <div>
+     <span>Sort notes:</span>
+     <select 
+     className='mx-1 p-0.5 cursor-pointer dark:bg-[#1a1a1a]' 
+     ref={selectref}
+     value={sortNotes}
+     onChange={(e) =>
+     {setsortNotes(e.target.value) 
+     localStorage.setItem("noteorder",e.target.value)}}>
      <option>Latest First</option>
      <option>Oldest First</option>
      </select>
