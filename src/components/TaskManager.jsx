@@ -11,7 +11,6 @@ function Taskmanager() {
   const [editTaskid, seteditTaskid] = useState(null)
   const [search,setsearch]=useState("")
   const[sort,setsort]=useState(()=>{return localStorage.getItem("taskorder") || "Latest First"})
-  // const order=localStorage.getItem("sortOrder")
   const displayTasks= sort==="Latest First"?[...tasks].reverse():tasks
   const handleBtn=()=>{
     setshowInput(true)
@@ -45,10 +44,6 @@ function Taskmanager() {
   const searchedTasks=displayTasks.filter((task)=>
     task.text.toLowerCase().includes(search.trim().toLowerCase())
   )
-
-    
-  
-
   return (
     <div>
     <div className='flex justify-between m-10 gap-2 max-md:flex-col max-md:m-3'>

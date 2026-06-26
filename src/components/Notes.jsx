@@ -10,7 +10,6 @@ function Notes() {
   const [search,setsearch]=useState("")
   const [sort,setsort]=useState(()=>{return localStorage.getItem("noteorder")||"Latest First"})
   const noteref=useRef(null)
-  // const order=localStorage.getItem("sortOrder")
   const handleBtn=()=>{
     setshowNote(true)
     }
